@@ -1,12 +1,28 @@
 #!ipxe
+
 ###
 ### netboot.xyz-custom menu
 ###
 
-:start
-echo Hello world!
-sleep 10
-goto custom_exit
+:custom
+clear custom_choice
+menu My Custom Menu
+item --gap        Talos Linux:
+item talos        ${space} Boot Talos Linux v1.13.6 (Secure Boot UKI)
+item --gap        --
+item return        ${space} Return to netboot.xyz main menu
+choose custom_choice || goto custom_exit
+echo ${cls}
+goto ${custom_choice} || goto custom_exit
+
+:talos
+echo Booting Talos Linux v1.13.6 (metal-amd64, Secure Boot)...
+imgfree
+kernel https://pxe.factory.talos.dev/image/708747e350d604ae9e57227d8dcf274091453ddb1097b765d4ea8884f1992c1f/v1.13.6/metal-amd64-secureboot-uki.efi talos.platform=metal console=tty0 init_on_alloc=1 slab_nomerge pti=on consoleblank=0 nvme_core.io_timeout=4294967295 printk.devkmsg=on selinux=1 module.sig_enforce=1 proc_mem.force_override=never lockdown=confidentiality
+boot || goto custom
+
+:return
+chain https://boot.netboot.xyz
 
 :custom_exit
-exit 0
+exit
