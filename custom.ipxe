@@ -18,7 +18,7 @@ goto ${custom_choice} || goto custom_exit
 :talos
 echo Booting Talos Linux v1.13.6 (metal-amd64, Secure Boot)...
 imgfree
-kernel https://pxe.factory.talos.dev/image/882884900d88065271bc0fd5a49f679dd042393dc4d3375fcc63673eabc9ea0e/v1.13.6/metal-amd64-secureboot-uki.efi talos.platform=metal console=tty0 init_on_alloc=1 slab_nomerge pti=on consoleblank=0 nvme_core.io_timeout=4294967295 printk.devkmsg=on selinux=1 module.sig_enforce=1 proc_mem.force_override=never lockdown=confidentiality
+kernel https://pxe.factory.talos.dev/image/708747e350d604ae9e57227d8dcf274091453ddb1097b765d4ea8884f1992c1f/v1.13.6/metal-amd64-secureboot-uki.efi talos.platform=metal console=tty0 init_on_alloc=1 slab_nomerge pti=on consoleblank=0 nvme_core.io_timeout=4294967295 printk.devkmsg=on selinux=1 module.sig_enforce=1 proc_mem.force_override=never lockdown=confidentiality
 boot || goto custom
 
 :return
